@@ -7,3 +7,4 @@
 *.snm
 *.tex~
 *.toc
+!banachtarski.pdf
