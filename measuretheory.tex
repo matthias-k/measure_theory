@@ -135,7 +135,7 @@
       A volume is a function $\mathcal{P}(\RR^n) \to [0, \infty]$ such that
       \begin{enumerate}
       \item Positivity: $\mu_n(A) \geq 0$ for all $A \subset \RR^n$.
-      \item Kongruence: $\mu_n(A) = \mu_n(B)$ for all kongruent $A$ and $B$.
+      \item Congruence: $\mu_n(A) = \mu_n(B)$ for all congruent $A$ and $B$.
       \item Norm: $\mu_n([0,1]^n) = 1$.
       \item $\sigma$-Additivity: $\mu_n(\bigcup_{i=1}^{\infty} A_i) =
         \sum_{i=1}^\infty \mu_n(A_i)$ for disjoint $A_i$.
@@ -157,11 +157,11 @@
 \begin{frame}{The vitali set}
   Let $V$ be a set of representatives for the quotient group $\RR/\QQ$
   from $[0,1]$, that is: For every $z \in \RR$, there is exactly one
-  element of $z+\QQ$ in $V$ and this element lies in $[0,1]$.
+  element of $z+\QQ$ in $V$ and this element lies within $[0,1]$.
 
   \begin{lemma}
     \begin{enumerate}
-    \item For $p\neq q$, $p,q\in\QQ$ and for a enumeration of the we
+    \item For $p\neq q$, $p,q\in\QQ$  we
       have $p+V \cap q+V = \emptyset$.
     \item Let $(p_n)_{n\in\NN}$ an enumeration of the rational numbers
       in $[-1,1]$ and $V_n=p_n + V$, then we have $[0,1] \subset
@@ -172,14 +172,16 @@
 
 \begin{frame}{The Vitali set}
 
-  We have by monotony
+  Since $[0,1] \subset \bigcup_{n=1}^{\infty} V_n \subset [-1, 2]$, we have by
+  monotony of the volume
   
-  \[1 \leq \sum_{n=1}^\infty \mu_1(V_n) \leq 3\]
-
+  \[1 \leq \sum_{n=1}^\infty \mu_1(V_n) \leq 3,\]
+  \pause
   but by congruence we have $\mu_1(V_n) = \mu_1(V)$ for all $n$, therefore
 
-  \[1 \leq \sum_{n=1}^\infty \mu_1(V) \leq 3\]
+  \[1 \leq \sum_{n=1}^\infty \mu_1(V) \leq 3.\]
 
+  \pause
   But if $\mu_1(V)=0$ then $\sum_{n=1}^\infty \mu_1(V)=0$ and if
   $\mu_1(V)>0$ then $\sum_{n=1}^\infty \mu_1(V) = \infty$. Therefore
   such a $\mu_1$ cannot exist.
@@ -228,7 +230,7 @@
     is called $\sigma$-algebra, if it satisfies the following properties:
     \begin{enumerate}
     \item $\Omega \in \mathcal{A}$
-    \item Closed unter complements: $X \in \mathcal{A} \Rightarrow
+    \item Closed under complements: $X \in \mathcal{A} \Rightarrow
       \Omega\setminus X \in \mathcal{A}$
     \item Closed under countable unions: If $X_n \in \mathcal{A}$ for all $n$,
       then $\bigcup_{n=1}^\infty X_n \in \mathcal{A}$.
@@ -321,6 +323,7 @@
 \end{frame}
 
 \begin{frame}[Integration theory]
+  
   \begin{center}
     \includegraphics[width=0.7\linewidth]{Riemannvslebesgue.png}
     \rotatebox{90}{\tiny Wikipedia}
