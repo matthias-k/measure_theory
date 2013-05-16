@@ -1,4 +1,5 @@
 \documentclass{beamer}
+\usepackage{pgfpages}
 
 \usepackage{amsmath}
 \usepackage{amsthm}
@@ -24,6 +25,9 @@
 \usetheme{Copenhagen}
 \useoutertheme{split}
 
+\setbeameroption{show notes}
+%\setbeameroption{show notes on second screen=right}
+
 \graphicspath{{images/}}
 
 \title{Measure Theory and Probability}
@@ -41,7 +45,15 @@
   \begin{itemize}
   \item Ca. 1900: What is the volume of a subset of $\RR^n$?
   \end{itemize}
-
+  \note[item]{Around 1900, mathematicians tied to come up with a
+    universal definition of the notion of volume.}
+  \note[item]{For quite a long time, they were able to work with their
+    intuitive feeling for volume. But the development of set theory
+    forced them to be more precise about their understanding of volume.}
+  \note[item]{To show you that this is not as trivial as one might think,
+    I want to show you some examples}
+\end{frame}
+\begin{frame}{What is volume?}
   \begin{minipage}{0.45\linewidth}
     \begin{center}
       \begin{tikzpicture}[style=thick, fill=green]
@@ -54,6 +66,10 @@
   \begin{minipage}{0.45\linewidth}
     $A = a \cdot b$
   \end{minipage}
+  \note[item]{This one is quite clear. The volume of a rectangle with sides
+   $a$ and $b$ should be $a\cdot b$. More exactly: If we take the volume of
+   the unit square to be one and want the volume to be multilinear, than we
+   get this.}
   \pause
   \begin{minipage}{0.45\linewidth}
     \begin{center}
@@ -68,6 +84,10 @@
   \begin{minipage}{0.45\linewidth}
     $A = a \cdot b + \tfrac12 a \cdot b = \tfrac 32 \cdot a \cdot b$
   \end{minipage}
+  \note[item]{This example is not that more complicated. Intuitively we
+    expect the volume to be additive. Thus we can divide this object into
+    two rectangles}
+  \pause
 
   \begin{minipage}{0.45\linewidth}
     \begin{center}
@@ -81,12 +101,23 @@
   \begin{minipage}{0.45\linewidth}
     $A = \tfrac12 a \cdot b$
   \end{minipage}
-
-
-
+  \note[item]{This equation becomes clear, if we divide a rectangle into two
+    triangles which we then intuitively assume to have the same volume.}
 \end{frame}
 
-\begin{frame}{Why Measure Theory?}
+\begin{frame}{What is volume?}
+  \note[item]{Now what can we learn from the circle? Of course we all know that
+    it's volume is $\pi r^2$, but how do we get this result? Obviously we cannot
+    divide the circle into some rectangles. But maybe we can do something else.}
+  \note[item]{We can try to approximate the circle with shapes of known volume.
+    With a triangle, we can get only a very rough approximation of the circle.}
+  \note[item]{But with four triangles, we already get a much better
+    approximation.}
+  \note[item]{Or with 10.}
+  \note[item]{With 16 triangles, we can hardly see the error of the
+    approximation on this slide.}
+  \note[item]{In the limit, we expect to volume of the triangles to converge
+    to the volume of the circle.}
   \begin{minipage}{0.45\linewidth}
   \begin{center}
     \begin{tikzpicture}[style=thick]
@@ -126,35 +157,53 @@
   \end{minipage}
 \end{frame}
 
-
+%\setbeamercovered{transparent}
 \begin{frame}{Why Measure Theory?}
-
-  \begin{itemize}
-  \item Ca. 1900: What is a volume?
+  \note[item]{Now let's sum up, what we have gained from our intuitive
+    thinking on volume}
     \begin{definition}
       A volume is a function $\mathcal{P}(\RR^n) \to [0, \infty]$ such that
-      \begin{enumerate}
+      \begin{enumerate}[<+-| alert@+>]
       \item Positivity: $\mu_n(A) \geq 0$ for all $A \subset \RR^n$.
+        \note[item]{First, we want it to be positive (remember, we are talking
+          about subsets. There is no way to distinguis $[a,b]$ from $[b,a]$
+          right now}
       \item Congruence: $\mu_n(A) = \mu_n(B)$ for all congruent $A$ and $B$.
+        \note[item]{Furthermore, we want it to be invariant under congruences.
+          That is, it should not change under rotation and mirroring. Otherwise
+          the example with the triangle would not work}
       \item Norm: $\mu_n([0,1]^n) = 1$.
+        \note[item]{Then, we want one volume fixed: The one of the unit
+          square.}
       \item $\sigma$-Additivity: $\mu_n(\bigcup_{i=1}^{\infty} A_i) =
         \sum_{i=1}^\infty \mu_n(A_i)$ for disjoint $A_i$.
+        \note[item]{And finally, we want it to be additive. But not only
+          for finite unions, but even for countable unions. We need this
+          property to be able to calculate the volume of the circle in
+          the way I outlined.}
       \end{enumerate}
     \end{definition}
-    \begin{lemma}
+    %\pause
+    \begin{lemma}<+->
       \begin{enumerate}
       \item $\mu_n(\{x\}) = 0$
       \item $\mu_n(A) \leq \mu_n(B)$ for $A \subseteq B$.
       \end{enumerate}
     \end{lemma}
-
-  \end{itemize}
-
-
+    \note[item]{From this properties, we already gain to important statements,
+      that we don't have to demand in addition: Points have volume 0 and
+      the volume is monoton: If one shape contains another one, it has
+      to have at least the same volume.}
 
 \end{frame}
 
 \begin{frame}{The vitali set}
+  \note[item]{Okay, now that we know how we would like our volume function
+    to behave, we just have to find it. More precisely, mathematicians
+    want to show that it exists and that it is unique. Till know,
+    basically, there could be more than one volume functions with this
+    property.}
+  \note[item]{This is what the mathematicians were
   Let $V$ be a set of representatives for the quotient group $\RR/\QQ$
   from $[0,1]$, that is: For every $z \in \RR$, there is exactly one
   element of $z+\QQ$ in $V$ and this element lies within $[0,1]$.
@@ -206,7 +255,7 @@
      with very little mathematical background
   \item Ingrediences
     \begin{itemize}
-    \item Transfinite induction
+    \item Shifting to infinity (``Trick of Hilbert's Hotel'')
     \item Paradoxial decomposition of a group generated by two rotations $f$ and $g$ into $I$, $J$, $K$, i.\,e., such that $fI = J \cup K$, $gI = J$, $g^2I = K$
     \item Axiom of choice
     \end{itemize}
@@ -217,7 +266,7 @@
 
 \begin{frame}{So far}
   \begin{itemize}
-  \item Cannot have volume function for all subsets of $\RR^n$.
+  \item We cannot have volume function for all subsets of $\RR^n$.
   \item Solution: Define it only on a specific set of subsets.
   \item This subset has to have certain properties to enable us
     to do the usual calculations for volumes
@@ -322,12 +371,23 @@
   \end{center}
 \end{frame}
 
-\begin{frame}[Integration theory]
-  
+\begin{frame}{Integration theory}
+  By a limit process (formal completion), the integral is extended to a space
+  $L_1$ of integrable ``functions''.
   \begin{center}
     \includegraphics[width=0.7\linewidth]{Riemannvslebesgue.png}
     \rotatebox{90}{\tiny Wikipedia}
   \end{center}
+\end{frame}
+
+\begin{frame}{Integration theory}
+  \begin{itemize}
+  \item More integrable functions: $\int_\RR \chi_\QQ \td x= 0$.
+  \item Much better convergence properties, e.\,g. dominated convergence: $f_n
+    \in L_1$, $f_n \to f$ pointwise and $|f_n|\leq g$ for some $g \in L_1$, then
+    $f \in L_1$ and $\int f = \lim \int f_n$ (For comparison: The Riemann
+    integral needs uniform convergence for this property).
+  \end{itemize}
 \end{frame}
 
 \section{Probability Theory}
