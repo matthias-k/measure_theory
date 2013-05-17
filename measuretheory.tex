@@ -163,6 +163,7 @@
     thinking on volume}
     \begin{definition}
       A volume is a function $\mathcal{P}(\RR^n) \to [0, \infty]$ such that
+      \pause
       \begin{enumerate}[<+-| alert@+>]
       \item Positivity: $\mu_n(A) \geq 0$ for all $A \subset \RR^n$.
         \note[item]{First, we want it to be positive (remember, we are talking
@@ -198,46 +199,108 @@
 \end{frame}
 
 \begin{frame}{The vitali set}
-  \note[item]{Okay, now that we know how we would like our volume function
+  \note[item]<1>{Okay, now that we know how we would like our volume function
     to behave, we just have to find it. More precisely, mathematicians
     want to show that it exists and that it is unique. Till know,
     basically, there could be more than one volume functions with this
     property.}
-  \note[item]{This is what the mathematicians were
-  Let $V$ be a set of representatives for the quotient group $\RR/\QQ$
-  from $[0,1]$, that is: For every $z \in \RR$, there is exactly one
+  \note[item]<1>{This is what the mathematicians were trying to do at the
+    beginning of the 20th century. But in 1904, the italian mathematician
+    \textsc{Vitali} proved that such a volume function cannot exist at all.}
+  \note[item]<1>{As his proof is quite easy, I am going to present it to you. It
+    is crucial as without this phenomenon there would be no need for measure
+    theory at all.}
+
+  \pause
+
+  Let $V$ be a set of representatives for the quotient group
+  $\RR/\QQ$ from $[0,1]$, that is: For every $z \in \RR$, there is exactly one
   element of $z+\QQ$ in $V$ and this element lies within $[0,1]$.
+
+  \note[item]<2>{We start with the quotient group $\RR/\QQ$. That is, we take
+    $\RR$ and identify all numbers, that differ only by a rational number. Thus,
+    for example, all rational numbers will be equal to 0 after the
+    identification.}
+
+  \note[item]<2>{Then from each class of identified numbers
+    we take exactly one, that we furthermore demand to be from within the
+    intervall $[0,1]$.}
+
+  \note[item]<2>{This is the vitali set, for which we will show that it
+    cannot have a well-defined volume.}
+
+  \pause
+
+  \note[item]{First, we need two simple properties of the vitali set}
 
   \begin{lemma}
     \begin{enumerate}
-    \item For $p\neq q$, $p,q\in\QQ$  we
-      have $p+V \cap q+V = \emptyset$.
-    \item Let $(p_n)_{n\in\NN}$ an enumeration of the rational numbers
-      in $[-1,1]$ and $V_n=p_n + V$, then we have $[0,1] \subset
+    \item For $p\neq q$, $p,q\in\QQ$ we have $p+V \cap q+V = \emptyset$.
+      \note[item]{The first is, that arbitrary shifts of the vitali set by an
+        rational offset are disjoint. That is simply by the very construction of
+        the vitali set: If two of this shifts would not be disjoint, than this
+        would say that two elements of the vitali set differ by a rational
+        number. But then these two elements are in the same class of $\RR/\QQ$
+        and hence the vitali set is allowed to contain at most one of
+        them. [Whiteboard!]}
+    \item Let $(p_n)_{n\in\NN}$ an enumeration of the rational numbers in
+      $[-1,1]$ and $V_n=p_n + V$, then we have $[0,1] \subset
       \bigcup_{n=1}^{\infty} V_n \subset [-1, 2]$.
+
+      \note[item]{This one says that the union of all these shifts contain the
+        unit interval and are contained in the interval $[-1,2]$.}
+      \note[item]{First the left inclusion: Let $x \in [0,1]$ and $\bar x$ its
+        class in $\RR/\QQ$. Then there is an $y \in \bar x$ with $y \in V$ and
+        $y-x = p_j \in \QQ$. Done. The right hand inclusion is trivial.}
     \end{enumerate}
   \end{lemma}
 \end{frame}
 
 \begin{frame}{The Vitali set}
+  Let $\mu_1$ be a volume function on $\RR$.
+ 
+  \note[item]{Now we can prove with the vitali set what we cannot have a
+    well-defined volume on $\RR$. First we assume that is has a volume, that is,
+    that there is a volume function on $\RR$.}  \pause
+
 
   Since $[0,1] \subset \bigcup_{n=1}^{\infty} V_n \subset [-1, 2]$, we have by
   monotony of the volume
   
   \[1 \leq \sum_{n=1}^\infty \mu_1(V_n) \leq 3,\]
+
+  \note[item]<2->{As a volume has to be monotone (as I told you before), we get by
+    $\sigma$-additivity that sum of the volumes of all the $V_n$ has to be
+    between $1$ and $3$.}
+  
+
   \pause
   but by congruence we have $\mu_1(V_n) = \mu_1(V)$ for all $n$, therefore
 
   \[1 \leq \sum_{n=1}^\infty \mu_1(V) \leq 3.\]
+
+  \note[item]<3->{But as the $V_n$ are just shifts of the vitali set, they have
+    to have all the same volume, thus we get that the countable sum over
+    the volume of $V$ has to be between $1$ and $3$.}
 
   \pause
   But if $\mu_1(V)=0$ then $\sum_{n=1}^\infty \mu_1(V)=0$ and if
   $\mu_1(V)>0$ then $\sum_{n=1}^\infty \mu_1(V) = \infty$. Therefore
   such a $\mu_1$ cannot exist.
 
+  \note[item]<4->{But this is a contradiction: Either the volume of $V$ is $0$,
+    then a countable sum of it is $0$ too, of course. Or it's volume is greater
+    than zero. Then a countable sum over it is $\infty$. Therefore a volume
+    function like desired cannot exist on $\RR$.}
+
 \end{frame}
 
 \begin{frame}{The Banach-Tarski Paradox}
+  \note[item]{To resolve the problem shown by the Vitali set, several ways were
+    suggested. One was to give up the $\sigma$-additivity. However, this is an
+    important property that is crucial for a lot of important theorems. And
+    furthermore, Banach and Tarski were able to show that even with usual
+    additivity, in dimension greater or equal 3 one gets problems.}
   \begin{theorem}[Banach-Tarski]
     Given a solid sphere in 3-dimensional space, there exists a decomposition of
     the sphere into five disjoint subsets (i.\,e., non-overlapping pieces),
