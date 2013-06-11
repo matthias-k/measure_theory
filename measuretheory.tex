@@ -47,12 +47,34 @@
 \begin{document}
 \begin{frame}
   \maketitle
+  \note[item]{Lucas suggested to give a tutorial on measure theory.}
+  \note[item]{I immediately agreed to to so, as I think measure theory is
+              very important for quite some reasons.}
+  \note[item]{First, it just explains what volume is and how you
+              should think about it in order to avoid some problems,
+              that you probably weren't even aware of}
+  \note[item]{Then, it explains how you should think about
+              integration and gives rise to a very powerful integral,
+              much more powerfull and well-behaved than the Riemann
+              integral that we usually are teached in school}
+  \note[item]{Furthermore, it gives sense to these strange $\td x$-things
+              in integration.}
+  \note[item]{Also, it gives a solid foundation to the so called
+              $\delta$-functions, that are loved a lot by physicists and
+              hated by mathematicians, at least the way physicists use them}
+  \note[item]{And last but not least, it gives a rich framework to build
+              a unified probability theory on, that does not have to distinguish
+              between a lot of different cases and that makes you aware of
+              the subtle problems that can arise in probability theory, e.g.
+              when dealing with conditional expectation values.}
 \end{frame}
 
 
 \begin{frame}
   \tableofcontents{}
-  \note[item]{Mathematics of measure theory in parts quite technical}
+  \note[item]{Mathematics of measure theory in parts quite technical.
+    The proofs contain often formulas like ``an infinite union over an
+    infinite intersection over an infinite union of some sets''.}
   \note[item]{Much more important when trying to understand measure theory: What
     is the problem measure theory is trying to solve?}  \note[item]{That is why
     I will start with some historical background and counterexamples that
@@ -273,7 +295,8 @@
         the unit interval and are contained in the interval $[-1,2]$.}
       \note[item]<3->{First the left inclusion: Let $x \in [0,1]$ and $\bar x$
         its class in $\RR/\QQ$. Then there is an $y \in \bar x$ with $y \in V$
-        and $y-x = p_j \in \QQ$. Done. The right hand inclusion is trivial.}
+        and $y-x = p_j \in \QQ$. As $x \in [0,1]$ and $y \in [0,1]$, $|x-y|\leq
+        1$. Done. The right hand inclusion is trivial.}
     \end{enumerate}
   \end{lemma}
 \end{frame}
@@ -302,7 +325,7 @@
   \[1 \leq \sum_{n=1}^\infty \mu_1(V) \leq 3.\]
 
   \note[item]<3->{But as the $V_n$ are just shifts of the vitali set, they have
-    to have all the same volume, thus we get that the countable sum over
+    to have all the same volume, thus we get that the countable infinite sum over
     the volume of $V$ has to be between $1$ and $3$.}
 
   \pause
@@ -323,6 +346,7 @@
     important property that is crucial for a lot of important theorems. And
     furthermore, Banach and Tarski were able to show that even with usual
     additivity, in dimension greater or equal 3 one gets problems.}
+  \pause
   \begin{theorem}[Banach-Tarski]
     Given a solid sphere in 3-dimensional space, there exists a decomposition of
     the sphere into five disjoint subsets (i.\,e., non-overlapping pieces),
@@ -336,8 +360,13 @@
 
 \begin{frame}{The Banach-Tarski Paradox}
   \begin{itemize}
-  \item Proof is a little bit technical, but perfectly understandable
-     with very little mathematical background
+  \item Proof is a little bit technical, but perfectly understandable with very
+    little mathematical background \note[item]{For those interested in it: There
+      is a very nice book by Leonard Wapner, \textit{Aus 1 mach 2}, that tells
+      the story behind this theorem and also give a version of the proof that is
+      perfectly understandable even with no mathematical background. Also there
+      is a good article in the \textit{Mathematical intelligencer}, that gives
+      an proof that is quite easy to understand.}
   \item Ingrediences
     \begin{itemize}
     \item Shifting to infinity (``Trick of Hilbert's Hotel'')
@@ -385,7 +414,12 @@
   \end{example}
   \note[item]<2->{The Borel algebra is maybe the most important example, as it
     is the set of sets for that a ``volume'' can be defined in $\RR^d$. It will
-    also play an important role in probability theory on $\RR^d$.}
+    also play an important role in probability theory on $\RR^d$. It
+    basically consists of all sets where the volume is obviously defined,
+    i.e. intervals. And furthermore, it contains all sets that we need
+    to get a proper $\sigma$-algebra out of this. This is actually the
+    definition of the Borel algebra: It is the smallest $\sigma$-algebra,
+    that contains all intervals $[a,b]$.}
   \note[item]<2->{If the base set is only countable, all the presented
     pathologies do not work and we can use all subsets.}
 \end{frame}
@@ -401,10 +435,15 @@
       then $\mu(\bigcup_n X_n) = \sum_n \mu(X_n)$.
     \end{enumerate}
   \end{definition}
-  \note[item]{A measure is the base object for things like volume functions or
-    later also probabilities}
+  \note[item]{Now, that we have resolved the problems with pathological sets by
+    excluding them in a well-defined manner, no problems rise when defining such
+    a thing as a volume function. We do it in a more general way (no
+    normalization, no invariance under congruence) as that is not needed for the
+    theory and call it \textit{measure} instead of volume function: The measure
+    is the base object for things like volume functions or later also
+    probabilities}
   \begin{example}
-    \begin{enumerate}
+    \begin{enumerate}[<+->]
     \item Lebesgue measure $\mu$ on $\RR$ with $\mathcal{B}$: The extension of
       $\mu([a,b])=b-a$ to $\mathcal{B}$ (it is all but trivial that it exists
       and is well-defined).
@@ -415,6 +454,12 @@
   \end{example}
   \note[item]<2->{The most important measure is the Lebesgue measure, which
     encapsulates the volume on $\RR$ resp. $\RR^d$.}
+  \note[item]<3->{Also of important is the counting measure, which measures a
+    set by just counting it.}
+  \note[item]<4->{The delta measure is basically what the delta functions become
+    in measure theory: It gives a set measure 1 if and only if it contains a
+    specific point, e.g. zero. Therefore it measures wheter a set contains
+    this point.}
 \end{frame}
 
 \begin{frame}{Integration theory}
@@ -426,13 +471,22 @@
   \end{definition}
   \begin{itemize}
   \item Important for integration: The measure integral divides
-     horizontal, not vertical
+    horizontally, not vertically.
+  \item Important for probability theory: Random variables will be
+    measurable functions
   \end{itemize}
   \note[item]{Urbild=Fiber: Fibers of measurable sets are measurable}
 \end{frame}
 
 \begin{frame}{Integration theory}
-  Let $f: \Omega \to \RR$ be measurable and elementary: It takes only finitely many values $\alpha_i$ on the disjoint measurable sets $A_i$. Then we define
+  \note[item]{Now we have all the definitions to define the measure
+     integral. You might wonder, why I care to define a new integral here,
+     you are probably just interested in probability theory. But
+     probability theory relies heavily on the measure integral, as you
+     will see later. Therefore I have to show it to you.}
+  Let $f: \Omega \to \RR$ be measurable and elementary: It takes only
+  finitely many values $\alpha_i$ on the disjoint measurable sets
+  $A_i$. Then we define
   \[
     \int_{\Omega} f\td \mu := \sum_{i=1}^n \alpha_i\mu(A_i)
   \]
