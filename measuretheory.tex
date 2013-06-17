@@ -574,6 +574,49 @@
 
 \section{Probability Theory}
 
+\begin{frame}{Vitali Example revisited}
+  \begin{theorem}
+    Let $\Omega=\{0,1\}^\NN$ be the result space of an infinitly often repeated
+    coin throw. Then there is no mapping $P: \mathcal{P}(\Omega) \to [0,1]$ such
+    that
+    \begin{enumerate}
+    \item $P(\Omega)=1$.
+    \item $\sigma$-Additivity: Let $A_1, A_2, \dots \subset \Omega$ pairwise
+      disjoint, then
+      $P(\bigcup_{i\geq 1} A_i) = \sum_i P(A_i)
+      $
+    \item Invariance: Let $T_n: \omega = (\omega_1, \dots) \mapsto (\omega_1,
+      \dots, 1-\omega_n, \dots)$ be the invertion of the outcome of the $n$-th
+      coin throw. Then $P(T_nA)=P(A)$ for all $A \subset \Omega$.
+    \end{enumerate}
+  \end{theorem}
+\end{frame}
+
+\begin{frame}{Vitali Example revisited}
+  \begin{proof}
+    \begin{itemize}
+    \item Define equivalence relation $\omega \sim \omega' :\Leftrightarrow
+      \omega_n = \omega'_n$ for all $n \gg 1$.
+    \item Let $A \subset \Omega$ be a system of representatives of $\Omega/\sim$
+    \item Let $J = \{S \subset \NN: \#S < \infty\}$ the (countable!) set of all
+      finite subsets of $\NN$.
+    \item For $S = \{n_1, \dots, n_k\} \in J$ define $T_S:= \prod_{n \in S}T_n =
+      T_{n_1}\circ \dots \circ T_{n_k}$. Then one has $\Omega=\bigcup_{S \in J}
+      T_S A$ an union of disjoint sets.
+    \item We get the contradiction
+      \[
+      1 = P(\Omega) = \sum_{S\in J} P(T_S A) = \sum_{S \in J} P(A) =
+      \begin{cases}
+        0 & P(A) = 0\\
+        \infty & P(A) >0
+      \end{cases}
+%\in \{0,
+%      \infty\}
+      \]
+    \end{itemize}
+  \end{proof}
+\end{frame}
+
 \begin{frame}{Probability theory}
   \begin{definition}[Probability space]
     A \textit{probability space} is a measure space $(\Omega, \mathcal{F}, P)$,
@@ -605,7 +648,7 @@
     $\Omega = \{0,1\}^\NN$, i.\,e. countably many coin throws.
   \item ``But for continuous distributions, we have the pdf!'': Theory becomes
     unnecessary complicated, if we have to distinguish all the time between
-    continuous and discrete distributions. Later: It is even more general.
+    continuous and discrete distributions. Also, pdfs do not always exist.
   \end{itemize}
 \end{frame}
 
@@ -679,21 +722,49 @@
     same reason as in the discrete case.}
 \end{frame}
 
+\begin{frame}{Cumulative Distribution Functions}
+  \begin{definition}[Cumulative Distribution Function]
+    Let $(\RR, \mathcal{F}, P)$ a probability space on $\RR$ such that $(-\infty,
+    x] \in \mathcal{F}$ for all $x \in \RR$, e.g.,
+    $\mathcal{F}=\mathcal{B}$. Then the function
+    \begin{align*}
+      cdf_P: \RR &\to [0,1]\\
+             x &\mapsto P[(-\infty, x]]
+    \end{align*}
+    is well-defined and called \textit{Cumulative Distribution Function of $P$}
+  \end{definition}
+  \pause
+  \begin{itemize}
+  \item Does not need a density function, exists for nearly all distributions on
+    $\RR$
+    \note[item]{Exceptions are only possible, if the $\sigma$-algebra is such
+      coarse, that $(-\infty, x]$ is not contained in it}
+  \item Makes sampling easy: If $X\sim \text{UNIF}_{[0,1]}$, then $cdf_P^{-1}(X)
+    \sim P$.
+    \note[item]{Also, easy to invert, as the cdf is monotone}
+  \end{itemize}
+\end{frame}
+
 \begin{frame}[Random variables]
   \begin{definition}[Random variable]
     Let $(\Omega, \mathcal{F}, P)$ be a probability space. A \textit{random
-      variable} is a measurable function $X: \Omega \to \Omega_2$ for some
+      variable} is a measurable function $X: \Omega \to \Omega'$ for some
     measurable space (i.\,e., a space with a $\sigma$-algebra). Usually
-    $\Omega_2=\RR^d$ with the Borel algebra.
+    $\Omega'=\RR^d$ with the Borel algebra.
   \end{definition}
   \note[item]{The function has to be measureable: This tells us that $P[X\in A]$
-    for all $A$ in the $\sigma$-algebra on $\Omega_2$. In other words: A random
-    variable induces a probability measure $P_X$ on $\Omega_2$.}
+    is for all $A$ in the $\sigma$-algebra on $\Omega'$. In other words: A
+    random variable induces a probability measure $P_X$ on $\Omega'$.}
 
   \begin{example}[Double dice roll]
     $\Omega=\{1, \dots, 6\}^2$. Then $f_{\text{sum}}((\omega_1, \omega_2)) =
     \omega_1+ \omega_2$ is a random variable.
   \end{example}
+  \begin{itemize}
+  \item Induces a probability measure $P_X$ on $\Omega', \mathcal{F}'$ via
+    $P_X[A] := P[X^{-1}(A)]$, therefore density, cdf, \dots can be defined
+    straight forward.
+  \end{itemize}
 \end{frame}
 
 \begin{frame}[Random variables]
@@ -720,6 +791,40 @@
      \int_{\Omega} \log\left(\frac{p(\omega)}{q(\omega)}\right) \td P(\omega)
    \]
   \end{itemize}
+\end{frame}
+
+\begin{frame}{Fubini's Theorem}
+  \note[item]{More general possible, but not now}
+  \begin{theorem}[Fubini]
+    Let $A$ and $B$ be $\sigma$-finite measure spaces, $A\times B$ the product
+    space and $f: A\times B \to \RR$ measurable. If
+    \[
+      \int_A \left( \int_B |f(x,y)| \td y\right) \td x < \infty,
+      \int_B \left( \int_A |f(x,y)| \td x\right) \td y < \infty
+    \]
+    then one has $f \in L_1(A \times B)$ and
+    \begin{align*}
+      \int_A \left( \int_B f(x,y) \td y\right) \td x
+        &=\int_B \left( \int_A f(x,y) \td x\right) \td y\\
+        &=\int_{A\times B} f(x,y) \td (x,y)
+    \end{align*}
+  \end{theorem}
+  \note[item]{Product space: Product of $\sigma$-algebras, extended to a
+    $\sigma$-algebra. Not important here.}
+  \note[item]{Note the absolute value! That is the important point!}
+  \note[item]{The Rieman Integral needs for an similar statement
+    continuous functions with compact support! That is a really heavy demand!}
+\end{frame}
+
+\begin{frame}{Fubini's Theorem}
+  \begin{example}
+    \begin{align*}
+      \int_0^1\int_0^1 \frac{x^2-y^2}{(x^2+y^2)^2}\td y \td x &= \frac{\pi}{4}\\
+      \int_0^1\int_0^1 \frac{x^2-y^2}{(x^2+y^2)^2}\td x \td y &= -\frac{\pi}{4}
+    \end{align*}
+    \note[item]{Via $\frac{x^2-y^2}{(x^2+y^2)^2} = \frac{\d^2}{\d x\d y} \arctan
+      \frac{x}{y}$}
+  \end{example}
 \end{frame}
 
 \begin{frame}{Examples}
